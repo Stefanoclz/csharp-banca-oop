@@ -104,5 +104,31 @@
                 return null;
             }
         }
+
+        public void RicercaCliente()
+        {
+            Console.WriteLine("Inserisci il nome, il cognome o il codice fiscale del cliente da cercare");
+            string cerca = Console.ReadLine();
+
+            bool assente = false;
+
+            foreach (Cliente cliente in clienti)
+            {
+                
+                if(cerca == cliente.Nome || cerca == cliente.Cognome || cerca == cliente.CodiceFiscale)
+                {
+                    Console.WriteLine("Utente trovato:");
+                    cliente.Stampa();
+                    break;
+                }else
+                {
+                    assente = true;
+                }
+            }
+            if (assente == true)
+            {
+                Console.WriteLine("Spiaze, cliente non presente nei registri");
+            }
+        }
     }
 }

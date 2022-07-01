@@ -17,10 +17,10 @@ namespace csharp_banca_oop
 
         }
 
-        string Nome { get; set; }
-        string Cognome { get; set; }
-        string CodiceFiscale { get; set; }
-        int Stipendio { get; set; }
+        public string Nome { get; set; }
+        public string Cognome { get; set; }
+        public string CodiceFiscale { get; set; }
+        public int Stipendio { get; set; }
 
         internal void Stampa()
         {

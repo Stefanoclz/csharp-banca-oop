@@ -16,7 +16,7 @@ if(entry == 1)
 
         bank.NuovoCliente(nuovoCliente);
         Console.WriteLine("Cliente aggiunto!");
-        Menu.Welcome(bank.nome);
+        bank.ListaClienti();
     }
     else if(userMenu == 2)
     {
@@ -26,7 +26,7 @@ if(entry == 1)
     }
     else if(userMenu == 3)
     {
-        // Ricerca utente;
+        bank.RicercaCliente();
     }
     else if(userMenu == 4)
     {
