@@ -15,9 +15,25 @@
             clienti = new List<Cliente>();
             prestiti = new List<Prestito>();
 
-            clienti.Add(new Cliente("Lorenzo", "Ariatta", "LRNRTT89L08C881X", 1900));
-            clienti.Add(new Cliente("Andrea", "Celiberti", "NDRCBR87F12C773U", 1450));
-            clienti.Add(new Cliente("Giovanni", "Brocco", "GVNBRC89L02F554Z", 1500));
+
+            Cliente user1 = new Cliente("Lorenzo", "Ariatta", "LRNRTT89L08C881X", 1900);
+            Cliente user2 = new Cliente("Andrea", "Celiberti", "NDRCBR87F12C773U", 1450);
+            Cliente user3 = new Cliente("Giovanni", "Brocco", "GVNBRC89L02F554Z", 1500);
+
+
+            clienti.Add(user1);
+            clienti.Add(user2);
+            clienti.Add(user3);
+
+            Prestito prest1 = new Prestito(user1, 50000, 710, "19/01/2022", "02/08/2047", "215L3LL0066");
+            Prestito prest2 = new Prestito(user2, 250000, 980, "05/05/2005", "31/12/2036", "LI1DEDED325");
+            Prestito prest3 = new Prestito(user3, 250000, 980, "05/05/2005", "31/12/2036", "LI1DEDED325");
+
+
+            prestiti.Add(prest1);
+            prestiti.Add(prest2);
+            prestiti.Add(prest3);
+
         }
 
         internal void NuovoCliente(Cliente cliente)
@@ -49,10 +65,12 @@
             return nuovo;
         }
 
-        public static Prestito CreaPrestito()
+        public Prestito CreaPrestito()
         {
-            Console.WriteLine("Inserisci intestatario");
-            Cliente user = Banca.CreaCliente();
+            Console.WriteLine("A quale cliente aggiungere il prestito?");
+            int scelta = ListaClienti();
+
+            Cliente user = clienti[scelta - 1];
 
             Console.WriteLine("Inserisci ammontare");
             int ammontare = Int32.Parse(Console.ReadLine());
@@ -74,14 +92,28 @@
             return nuovo;
         }
 
-        internal int ListaClienti()
+        public int ListaClienti()
         {
-            Console.WriteLine("Scegli utente da modificare:");
+            Console.WriteLine("Scegli utente:");
             int pos = 1;
             foreach (Cliente cliente in clienti)
             {
                 Console.Write(pos + "\t");
                 cliente.Stampa();
+                pos++;
+            }
+
+            int selettore = Int32.Parse(Console.ReadLine());
+            return selettore;
+        }
+
+        internal int ListaPrestiti()
+        {
+            int pos = 1;
+            foreach (Prestito prestito in prestiti)
+            {
+                Console.Write(pos + "\t");
+                prestito.Stampa();
                 pos++;
             }
 

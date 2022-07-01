@@ -41,5 +41,17 @@ if(entry == 1)
 else if(entry == 2)
 {
     int userLending = Menu.MenuPrestiti();
+
+    if(userLending == 1)
+    {
+        Prestito nuovoPrestito = bank.CreaPrestito();
+        bank.NuovoPrestito(nuovoPrestito);
+        Console.WriteLine("Presito aggiunto");
+        bank.ListaPrestiti();
+    }
+    else if(userLending == 2)
+    {
+        //Ricerca prestito tramite CF
+    }
 }
 

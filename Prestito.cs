@@ -28,7 +28,10 @@ namespace csharp_banca_oop
 
         internal void Stampa()
         {
-            Console.WriteLine($"Intestatario: {this.intestatario} | ammontare: {this.Ammontare} | Rata: {this.Rata} | data inizio: {this.DataInizio} | data fine: {this.DataFine} | id: {this.Id}");
+            Console.WriteLine($"Prestito a nome di: {this.intestatario.Nome} {this.intestatario.Cognome}");
+            Console.WriteLine($"ammontare: {this.Ammontare} | Rata: {this.Rata} | data inizio: {this.DataInizio} | data fine: {this.DataFine} | id: {this.Id}");
+            Console.WriteLine("__________________________________________________________________");
+            Console.WriteLine();
         }
     }
 }
