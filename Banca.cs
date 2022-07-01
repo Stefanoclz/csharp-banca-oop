@@ -28,11 +28,13 @@
             Prestito prest1 = new Prestito(user1, 50000, 710, "19/01/2022", "02/08/2047", "215L3LL0066");
             Prestito prest2 = new Prestito(user2, 250000, 980, "05/05/2005", "31/12/2036", "LI1DEDED325");
             Prestito prest3 = new Prestito(user3, 250000, 980, "05/05/2005", "31/12/2036", "LI1DEDED325");
+            Prestito prest4 = new Prestito(user1, 30000, 480, "03/07/2003", "14/03/2018", "8548854L3EL10");
 
 
             prestiti.Add(prest1);
             prestiti.Add(prest2);
             prestiti.Add(prest3);
+            prestiti.Add(prest4);
 
         }
 
@@ -168,7 +170,7 @@
             Console.WriteLine("Inserisci il CF dell'intestatario del prestito");
             string param = Console.ReadLine();
 
-
+            int totale = 0;
             bool NonTrovato = false;
             foreach (Prestito prestito in prestiti)
             {
@@ -176,6 +178,8 @@
                 if(check.CodiceFiscale == param)
                 {
                     prestito.Stampa();
+                    int ammontare = prestito.GetAmmontare();
+                    totale += ammontare;
                 }else
                 {
                     NonTrovato = true;
@@ -183,7 +187,9 @@
                 }
             }
 
-            if(NonTrovato == true)
+            Console.WriteLine("Somma totale prestiti:" + totale);
+
+            if (NonTrovato == true)
             {
                 Console.WriteLine("Non esistono prestiti legati all'utente con il CF inserito");
             }

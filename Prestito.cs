@@ -38,5 +38,10 @@ namespace csharp_banca_oop
         {
             return this.intestatario;
         }
+
+        public int GetAmmontare()
+        {
+            return this.Ammontare;
+        }
     }
 }
