@@ -51,7 +51,7 @@ else if(entry == 2)
     }
     else if(userLending == 2)
     {
-        //Ricerca prestito tramite CF
+        bank.RicercaPrestito();
     }
 }
 

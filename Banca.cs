@@ -159,7 +159,33 @@
             }
             if (assente == true)
             {
-                Console.WriteLine("Spiaze, cliente non presente nei registri");
+                Console.WriteLine("Spiacenti, cliente non presente nei registri");
+            }
+        }
+
+        public void RicercaPrestito()
+        {
+            Console.WriteLine("Inserisci il CF dell'intestatario del prestito");
+            string param = Console.ReadLine();
+
+
+            bool NonTrovato = false;
+            foreach (Prestito prestito in prestiti)
+            {
+                Cliente check = prestito.GetIntestatario();
+                if(check.CodiceFiscale == param)
+                {
+                    prestito.Stampa();
+                }else
+                {
+                    NonTrovato = true;
+                    Console.WriteLine();
+                }
+            }
+
+            if(NonTrovato == true)
+            {
+                Console.WriteLine("Non esistono prestiti legati all'utente con il CF inserito");
             }
         }
     }

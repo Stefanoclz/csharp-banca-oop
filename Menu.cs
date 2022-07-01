@@ -48,5 +48,6 @@ namespace csharp_banca_oop
             int selettore = Int32.Parse(Console.ReadLine());
             return selettore;
         }
+
     }
 }

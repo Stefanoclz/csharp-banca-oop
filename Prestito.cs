@@ -33,5 +33,10 @@ namespace csharp_banca_oop
             Console.WriteLine("__________________________________________________________________");
             Console.WriteLine();
         }
+
+        public Cliente GetIntestatario()
+        {
+            return this.intestatario;
+        }
     }
 }
