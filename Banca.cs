@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace csharp_banca_oop
+﻿namespace csharp_banca_oop
 {
     internal class Banca
     {
@@ -17,12 +11,16 @@ namespace csharp_banca_oop
         public Banca(string nome)
         {
             this.nome = nome;
-            
+
             clienti = new List<Cliente>();
             prestiti = new List<Prestito>();
+
+            clienti.Add(new Cliente("Lorenzo", "Ariatta", "LRNRTT89L08C881X", 1900));
+            clienti.Add(new Cliente("Andrea", "Celiberti", "NDRCBR87F12C773U", 1450));
+            clienti.Add(new Cliente("Giovanni", "Brocco", "GVNBRC89L02F554Z", 1500));
         }
 
-        public void NuovoCliente(Cliente cliente)
+        internal void NuovoCliente(Cliente cliente)
         {
             clienti.Add(cliente);
         }
@@ -76,11 +74,34 @@ namespace csharp_banca_oop
             return nuovo;
         }
 
-        internal void ListaClienti()
+        internal int ListaClienti()
         {
+            Console.WriteLine("Scegli utente da modificare:");
+            int pos = 1;
             foreach (Cliente cliente in clienti)
             {
+                Console.Write(pos + "\t");
                 cliente.Stampa();
+                pos++;
+            }
+
+            int selettore = Int32.Parse(Console.ReadLine());
+            return selettore;
+        }
+
+        public Cliente ModificaCliente(int param)
+        {
+            param--;
+            if(param <= clienti.Count() && param > 0)
+            {
+                clienti.RemoveAt(param);
+                Cliente modificato = Banca.CreaCliente();
+                return modificato;
+            }
+            else
+            {
+                Console.WriteLine("Selezione errata");
+                return null;
             }
         }
     }

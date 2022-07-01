@@ -20,7 +20,9 @@ if(entry == 1)
     }
     else if(userMenu == 2)
     {
-        //Modifica utente;
+        int modifier = bank.ListaClienti();
+        bank.NuovoCliente(bank.ModificaCliente(modifier));
+        bank.ListaClienti();
     }
     else if(userMenu == 3)
     {
