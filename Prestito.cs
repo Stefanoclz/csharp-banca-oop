@@ -12,11 +12,11 @@ namespace csharp_banca_oop
 
         int Ammontare { get; set; }
         int Rata { get; set; }
-        string DataInizio { get; set; }
-        string DataFine { get; set; }
+        DateOnly DataInizio { get; set; }
+        DateOnly DataFine { get; set; }
         string Id { get; set; }
 
-        public Prestito(Cliente intestatario, int ammontare, int rata, string dataInizio, string dataFine, string id)
+        public Prestito(Cliente intestatario, int ammontare, int rata, DateOnly dataInizio, DateOnly dataFine, string id)
         {
             this.intestatario = intestatario;
             Ammontare = ammontare;
@@ -43,5 +43,15 @@ namespace csharp_banca_oop
         {
             return this.Ammontare;
         }
+
+        /*public DateTime GetDataInizio()
+        {
+            return this.DataInizio;
+        }
+
+        public DateTime GetDataFine()
+        {
+            return this.DataFine;
+        }*/
     }
 }

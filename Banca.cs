@@ -25,10 +25,10 @@
             clienti.Add(user2);
             clienti.Add(user3);
 
-            Prestito prest1 = new Prestito(user1, 50000, 710, "19/01/2022", "02/08/2047", "215L3LL0066");
-            Prestito prest2 = new Prestito(user2, 250000, 980, "05/05/2005", "31/12/2036", "LI1DEDED325");
-            Prestito prest3 = new Prestito(user3, 250000, 980, "05/05/2005", "31/12/2036", "LI1DEDED325");
-            Prestito prest4 = new Prestito(user1, 30000, 480, "03/07/2003", "14/03/2018", "8548854L3EL10");
+            Prestito prest1 = new Prestito(user1, 50000, 710, DateOnly.Parse("19/01/2022"), DateOnly.Parse("02/08/2047"), "215L3LL0066");
+            Prestito prest2 = new Prestito(user2, 250000, 980, DateOnly.Parse("05/05/2005"), DateOnly.Parse("31/12/2036"), "LI1DEDED325");
+            Prestito prest3 = new Prestito(user3, 250000, 980, DateOnly.Parse("05/05/2005"), DateOnly.Parse("31/12/2036"), "LI1DEDED325");
+            Prestito prest4 = new Prestito(user1, 30000, 480, DateOnly.Parse("03/07/2003"), DateOnly.Parse("14/03/2018"), "8548854L3EL10");
 
 
             prestiti.Add(prest1);
@@ -81,10 +81,10 @@
             int rata = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Inserisci data di inizio");
-            string dataInizio = Console.ReadLine();
+            DateOnly dataInizio = DateOnly.Parse(Console.ReadLine());
 
             Console.WriteLine("Inserisci data di fine");
-            string dataFine = Console.ReadLine();
+            DateOnly dataFine = DateOnly.Parse(Console.ReadLine());
 
             Console.WriteLine("Inserisci id prestito");
             string id = Console.ReadLine();
