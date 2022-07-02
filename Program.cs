@@ -2,6 +2,19 @@
 
 using csharp_banca_oop;
 
+
+Menu start = new Menu();
+start.Welcome("Lupin Bank");
+
+
+
+
+//***************************
+// Vecchio codice che non permetteva il loop del menu
+//***************************
+
+ 
+/*
 Banca bank = new Banca("Lupin");
 
 int entry = Menu.Welcome(bank.nome);
@@ -53,5 +66,9 @@ else if(entry == 2)
     {
         bank.RicercaPrestito();
     }
-}
+    else if (userLending == 3)
+    {
+        entry = Menu.Welcome(bank.nome);
+    }
+}*/
 
