@@ -45,7 +45,7 @@ namespace csharp_banca_oop
             Console.WriteLine("Quanto vuoi depositare?");
             int deposito = Int32.Parse(Console.ReadLine());
 
-            if(deposito < 5000 && deposito > 0)
+            if(deposito <= 5000 && deposito > 0)
             {
                 this.totaleConto += deposito;
                 Console.WriteLine($"Deposito effettuato! Hai depositato {deposito} Euro");

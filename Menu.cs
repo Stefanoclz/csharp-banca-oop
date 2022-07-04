@@ -71,6 +71,10 @@ namespace csharp_banca_oop
                 else if (userMenu == 3)
                 {
                     Cliente find = bank.RicercaCliente();
+                    if (find == null)
+                    {
+                        userMenu = MenuUtente();
+                    }
                     foreach (ContoClassico contoC in bank.contiClassici)
                     {
                         if(contoC.intestatario == find)
@@ -98,10 +102,42 @@ namespace csharp_banca_oop
                         int type = Int32.Parse(Console.ReadLine());
                         if(type == 1)
                         {
+
                             ContoClassico nuovo = new ContoClassico(find, 0);
-                        }else if(type == 2)
+                            Console.WriteLine("Conto Classico creato!");
+                            Console.WriteLine("Saldo attuale: 0 Euro");
+                            Console.WriteLine("Vuoi aggiungere credito?");
+                            Console.WriteLine("Digita \"SI\" per aggiungere credito al conto");
+                            string add = Console.ReadLine();
+                            if(add == "SI")
+                            {
+                                nuovo.Deposita();
+                            }
+                            else
+                            {
+                                contopoint = MenuConto();
+                            }
+
+                            nuovo.StampaConto();
+                        }
+                        else if(type == 2)
                         {
                             ContoRisparmio nuovo = new ContoRisparmio(find, 0);
+                            Console.WriteLine("Conto Risparmio creato!");
+                            Console.WriteLine("Saldo attuale: 0 Euro");
+                            Console.WriteLine("Vuoi aggiungere credito?");
+                            Console.WriteLine("Digita \"SI\" per aggiungere credito al conto");
+                            string add = Console.ReadLine();
+                            if (add == "SI")
+                            {
+                                nuovo.Deposita();
+                            }
+                            else
+                            {
+                                contopoint = MenuConto();
+                            }
+
+                            nuovo.StampaConto();
                         } else
                         {
                             Console.WriteLine("Selezione errata!");
