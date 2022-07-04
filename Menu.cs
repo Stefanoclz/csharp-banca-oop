@@ -70,17 +70,132 @@ namespace csharp_banca_oop
                 }
                 else if (userMenu == 3)
                 {
-                    bank.RicercaCliente();
-                    Console.WriteLine("1. Torna a Menu Utente");
-                    Console.WriteLine("2. Torna a Home");
-                    int exit = Int32.Parse(Console.ReadLine());
-                    if (exit == 1)
+                    Cliente find = bank.RicercaCliente();
+                    foreach (ContoClassico contoC in bank.contiClassici)
                     {
-                        MenuUtente();
+                        if(contoC.intestatario == find)
+                        {
+                            //Console.WriteLine($"Trovato Conto Classico intestato al cliente {find.Nome} {find.Cognome}");
+                            contoC.StampaConto();
+                        }            
                     }
-                    else if (exit == 2)
+
+                    foreach(ContoRisparmio contoR in bank.contiRisparmio)
                     {
-                        Welcome(bank.nome);
+                        if(contoR.intestatario == find)
+                        {
+                            //Console.WriteLine($"Trovato Conto Risparmio intestato al cliente {find.Nome} {find.Cognome}");
+                            contoR.StampaConto();
+                        }
+                    }
+
+                    int contopoint = MenuConto();
+                    if(contopoint == 1)
+                    {
+                        Console.WriteLine("Che conto vuoi aggiungere?");
+                        Console.WriteLine("1. Conto Classico");
+                        Console.WriteLine("2. Conto Risparmio");
+                        int type = Int32.Parse(Console.ReadLine());
+                        if(type == 1)
+                        {
+                            ContoClassico nuovo = new ContoClassico(find, 0);
+                        }else if(type == 2)
+                        {
+                            ContoRisparmio nuovo = new ContoRisparmio(find, 0);
+                        } else
+                        {
+                            Console.WriteLine("Selezione errata!");
+                            contopoint = MenuConto();
+                        }
+
+                    }else if(contopoint == 2)
+                    {
+                        ContoClassico findContoC = bank.RicercaContoClassico(find);
+                        ContoRisparmio findContoR = bank.RicercaContoRisparmio(find);
+
+                        if(findContoC != null && findContoR != null)
+                        {
+                            Console.WriteLine("Sono stati trovati 2 diversi tipi di conto, da quale vuoi prelevare?");
+                            findContoC.StampaConto();
+                            findContoR.StampaConto();
+                            Console.WriteLine("1. Conto Classico");
+                            Console.WriteLine("2. Conto Risparmio");
+                            int sceltaConto = Int32.Parse(Console.ReadLine());
+
+                            if(sceltaConto == 1)
+                            {
+                                findContoC.Preleva();
+                            }
+                            else if(sceltaConto == 2)
+                            {
+                                findContoR.Preleva();
+                            }else
+                            {
+                                Console.WriteLine("Scelta errata!");
+                                contopoint = MenuConto();
+                            }
+                        }
+                        else if(findContoC != null && findContoR == null)
+                        {
+                            findContoC.Preleva();
+                        }
+                        else if(findContoC == null && findContoR != null)
+                        {
+                            findContoR.Preleva();
+                        } else
+                        {
+                            Console.WriteLine("Non sono stati trovati conti intestati al cliente");
+                        }
+                    }
+                    else if(contopoint == 3)
+                    {
+                        ContoClassico findContoC = bank.RicercaContoClassico(find);
+                        ContoRisparmio findContoR = bank.RicercaContoRisparmio(find);
+
+                        if (findContoC != null && findContoR != null)
+                        {
+                            Console.WriteLine("Sono stati trovati 2 diversi tipi di conto, in quale vuoi depositare?");
+                            findContoC.StampaConto();
+                            findContoR.StampaConto();
+                            Console.WriteLine("1. Conto Classico");
+                            Console.WriteLine("2. Conto Risparmio");
+                            int sceltaConto = Int32.Parse(Console.ReadLine());
+
+                            if (sceltaConto == 1)
+                            {
+                                findContoC.Deposita();
+                            }
+                            else if (sceltaConto == 2)
+                            {
+                                findContoR.Deposita();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Scelta errata!");
+                                contopoint = MenuConto();
+                            }
+                        }
+                        else if (findContoC != null && findContoR == null)
+                        {
+                            findContoC.Deposita();
+                        }
+                        else if (findContoC == null && findContoR != null)
+                        {
+                            findContoR.Deposita();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Non sono stati trovati conti intestati al cliente");
+                        }
+                    }
+                    else if(contopoint == 4)
+                    {
+                        contopoint = MenuConto();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Selezione errata!");
+                        contopoint = MenuConto();
                     }
                 }
                 else if (userMenu == 4)
@@ -162,6 +277,18 @@ namespace csharp_banca_oop
             Console.WriteLine("1. Aggiungi nuovo utente");
             Console.WriteLine("2. Modifica utente");
             Console.WriteLine("3. Ricerca utente");
+            Console.WriteLine("4. Indietro");
+
+            int selettore = Int32.Parse(Console.ReadLine());
+            return selettore;
+        }
+
+        public static int MenuConto()
+        {
+            Console.WriteLine("Menu Conto:");
+            Console.WriteLine("1. Aggiungi Conto");
+            Console.WriteLine("2. Preleva dal conto");
+            Console.WriteLine("3. Deposita sul conto");
             Console.WriteLine("4. Indietro");
 
             int selettore = Int32.Parse(Console.ReadLine());

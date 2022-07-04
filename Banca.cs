@@ -8,12 +8,19 @@
 
         public List<Prestito> prestiti;
 
+        public List<ContoClassico> contiClassici;
+
+        public List<ContoRisparmio> contiRisparmio;
+
         public Banca(string nome)
         {
             this.nome = nome;
 
             clienti = new List<Cliente>();
             prestiti = new List<Prestito>();
+            contiClassici = new List<ContoClassico>();
+            contiRisparmio = new List<ContoRisparmio>();
+            
 
 
             Cliente user1 = new Cliente("Lorenzo", "Ariatta", "LRNRTT89L08C881X", 1900);
@@ -35,6 +42,20 @@
             prestiti.Add(prest2);
             prestiti.Add(prest3);
             prestiti.Add(prest4);
+
+            ContoClassico conto1 = new ContoClassico(user1, 143000);
+            ContoClassico conto2 = new ContoClassico(user2, 32000);
+            ContoClassico conto3 = new ContoClassico(user3, 54000);
+
+            contiClassici.Add(conto1);
+            contiClassici.Add(conto2);
+            contiClassici.Add(conto3);
+
+            ContoRisparmio contoR1 = new ContoRisparmio(user1, 205000);
+            ContoRisparmio contoR2 = new ContoRisparmio(user3, 98000);
+
+            contiRisparmio.Add(contoR1);
+            contiRisparmio.Add(contoR2);
 
         }
 
@@ -139,7 +160,7 @@
             }
         }
 
-        public void RicercaCliente()
+        public Cliente RicercaCliente()
         {
             Console.WriteLine("Inserisci il nome, il cognome o il codice fiscale del cliente da cercare");
             string cerca = Console.ReadLine();
@@ -153,7 +174,8 @@
                 {
                     Console.WriteLine("Utente trovato:");
                     cliente.Stampa();
-                    break;
+                    Cliente trovato = cliente;
+                    return trovato;
                 }else
                 {
                     assente = true;
@@ -163,6 +185,8 @@
             {
                 Console.WriteLine("Spiacenti, cliente non presente nei registri");
             }
+
+            return null;
         }
 
         public void RicercaPrestito()
@@ -171,6 +195,7 @@
             string param = Console.ReadLine();
 
             int totale = 0;
+            double totaleTassato = 0;
             bool NonTrovato = false;
             foreach (Prestito prestito in prestiti)
             {
@@ -179,8 +204,11 @@
                 {
                     prestito.Stampa();
                     int ammontare = prestito.GetAmmontare();
+                    TassoFisso tasso = new TassoFisso();
                     totale += ammontare;
-                }else
+                    totaleTassato += tasso.AddInteresse(ammontare);
+                }
+                else
                 {
                     NonTrovato = true;
                     Console.WriteLine();
@@ -188,11 +216,44 @@
             }
 
             Console.WriteLine("Somma totale prestiti:" + totale);
+            Console.WriteLine("Somma totale prestiti tassati:" + totaleTassato);
 
             if (NonTrovato == true)
             {
                 Console.WriteLine("Non esistono prestiti legati all'utente con il CF inserito");
             }
+        }
+
+        public ContoClassico RicercaContoClassico(Cliente intestatario)
+        {
+            foreach(ContoClassico contoC in this.contiClassici)
+            {
+                if(contoC.intestatario == intestatario)
+                {
+                    Console.WriteLine();
+                    contoC.StampaConto();
+                    return contoC;
+                    Console.WriteLine();
+                }
+            }
+
+            return null;
+        }
+
+        public ContoRisparmio RicercaContoRisparmio(Cliente intestatario)
+        {
+            foreach (ContoRisparmio contoR in this.contiRisparmio)
+            {
+                if (contoR.intestatario == intestatario)
+                {
+                    Console.WriteLine();
+                    contoR.StampaConto();
+                    return contoR;
+                    Console.WriteLine();
+                }
+            }
+
+            return null;
         }
     }
 }
